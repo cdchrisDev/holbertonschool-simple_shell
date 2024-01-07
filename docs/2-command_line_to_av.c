@@ -2,17 +2,19 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-
-int main(int ac, char **av)
+int main(void)
 {
-	char str = NULL;
-	char delim = NULL;
-	size_t n;
+	char c[] = "Hola como estas";
+	char d[] = " ";
+	char *p;
 
-	delim = " ";
+	p = strtok(c, d);
+	
+	while (p != NULL)
+	{
+		printf("%s", p);
+		p = strtok (NULL, d);
+	}
 
-	getline(&str, &n, stdin);
-	strtok(str, delim);
-
-	printf("%s\n", str);
+	putchar('\n');
 }

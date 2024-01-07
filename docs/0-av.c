@@ -4,9 +4,10 @@
 #include <stdio.h>
 int main(int ac, char **av)
 {
-	int i = 0;
+	int i = 1;
+	(void)ac;
 
-	while (i++ != ac)
+	while (av[i++] != NULL)
 		printf("%s ", av[i]);
 
 	putchar('\n');
