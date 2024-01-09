@@ -25,9 +25,13 @@ int main(int argc, char *argv[])
 	else
 		printf("I returned to the father, cuz I'm chris again (%u) \n", getid);
 
+	MyPid = fork();
 	if (MyPid == 0)
 	{
-		static char *newarg[] = { NULL, "hello", "world", NULL};
+		wait(&status);
+		MyPid = fork();
+
+		static char *newarg[] = { "/bin/ls", "-l", "/tmp", NULL};
 		static char *newEnviron[] = { NULL };
 
 		if (argc != 2)
@@ -36,13 +40,15 @@ int main(int argc, char *argv[])
 			exit(EXIT_FAILURE);
 		}
 		newarg[0] = argv[1];
+		wait(&status);
 
 		execve(argv[1], newarg, newEnviron);
 	}
 	else
 	{
+		fork();
 		printf("I'm your father\n");
+		wait(&status);
 	}
 	return (0);
-
 }
