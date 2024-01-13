@@ -10,10 +10,10 @@ char *_getenv(const char *name)
 	char *val;
 
 	if (!name)
-		return (NULL)
-	for (i = 0; enviro[i]; i++)
+		return (NULL);
+	for (i = 0; environ[i]; i++)
 	{
-		j = 0
+		j = 0;
 		if (name[j] == environ[i][j])
 		{
 			while (name[j])
@@ -46,7 +46,7 @@ PATH_list *add_node_end(PATH_list **head, char *str)
 	new = malloc(sizeof(PATH_list));
 
 	if (!new || !str)
-		return (NULL)
+		return (NULL);
 
 	new->dir = str;
 	if (!*head)
@@ -56,7 +56,7 @@ PATH_list *add_node_end(PATH_list **head, char *str)
 		tmp = *head;
 
 		while (tmp->p)
-			tmp = tmp->;
+			tmp = tmp->p;
 
 		tmp->p = new;
 	}
@@ -70,12 +70,12 @@ PATH_list *add_node_end(PATH_list **head, char *str)
 PATH_list *goto_path(char *path)
 {
 	PATH_list *head = '\0';
-	char *token, *cpath _strdup(path);
+	char *tok, *cpath = _strdup(path);
 
 	tok = strtok(cpath, ":");
 	while (tok)
 	{
-		head = add_node_end(&head, token);
+		head = add_node_end(&head, tok);
 		tok = strtok(NULL, ":");
 	}
 	return (head);

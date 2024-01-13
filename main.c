@@ -6,7 +6,7 @@
  */
 void sig_handler(int sig_n)
 {
-	if (sig_n == SIGNINT)
+	if (sig_n == SIGINT)
 		_puts("\n#cisfun$ ");
 }
 /**
@@ -15,15 +15,14 @@ void sig_handler(int sig_n)
  * @bf: buffer
  * Return: void
  */
-void _EOF(int len, char *bf)
+void _EOF(int len, char *bff)
 {
-	void(bf);
 	if (len == -1)
 	{
-		if (issatty(STDIN_FILENO))
+		if (isatty(STDIN_FILENO))
 		{
 			_puts("\n");
-			free(bf);
+			free(bff);
 		}
 		exit(0);
 	}
@@ -43,7 +42,7 @@ void _issatty(void)
 int main(void)
 {
 	ssize_t len = 0;
-	char *bf = NULL, *value, *pathname, **argv;
+	char *bffer = NULL, *val, *PATH_name, **argv;
 	size_t size = 0;
 	PATH_list *head = '\0';
 
@@ -51,16 +50,16 @@ int main(void)
 	while (len != EOF)
 	{
 		_issatty();
-		len = getline(&bf, &size, stdin);
-		_EOF(len, bf);
-		arv = _split(bf, " \n");
+		len = getline(&bffer, &size, stdin);
+		_EOF(len, bffer);
+		argv = _split(bffer, " \n");
 		if (!argv || argv[0])
 			eXeqtor(argv);
 		else
 		{
 			val = _getenv("PATH");
-			head = goto_path(value);
-			PATH_name = _chos(arg[0], head);
+			head = goto_path(val);
+			PATH_name = _chos(argv[0], head);
 
 			if (!PATH_name)
 				eXeqtor(argv);
@@ -75,6 +74,6 @@ int main(void)
 	}
 	free_list(head);
 	freeargv(argv);
-	free(bf);
+	free(bffer);
 	return (0);
 }

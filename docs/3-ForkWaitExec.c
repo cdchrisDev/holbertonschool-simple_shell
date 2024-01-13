@@ -21,34 +21,33 @@ int main(int argc, char *argv[])
 	/* checking process status*/
 	getid = getpid();
 	if (MyPid == 0)
+	{
+		fork();
 		printf("After fork I'm another,now %u. I grew up so much I became the child.\n", getid);
-	else
+
+		wait(&status);
+
+                MyPid = fork();
+
+                char *argv[] = { "/bin/ls", "-l", "/tmp/", NULL };
+		char *newarg = argv[0];
+
+                if (argc != 2)
+                {
+                        fprintf(stderr, "Usage %s <file-to-exec>\n", argv[0]);
+                        exit(EXIT_FAILURE);
+                }
+
+		execve(newarg, argv, NULL);
+	}
+	else if (MyPid != 0)
 		printf("I returned to the father, cuz I'm chris again (%u) \n", getid);
 
-	MyPid = fork();
-	if (MyPid == 0)
-	{
-		wait(&status);
-		MyPid = fork();
-
-		static char *newarg[] = { "/bin/ls", "-l", "/tmp", NULL};
-		static char *newEnviron[] = { NULL };
-
-		if (argc != 2)
-		{
-			fprintf(stderr, "Usage %s <file-to-exec>\n", argv[0]);
-			exit(EXIT_FAILURE);
-		}
-		newarg[0] = argv[1];
-		wait(&status);
-
-		execve(argv[1], newarg, newEnviron);
-	}
 	else
 	{
 		fork();
 		printf("I'm your father\n");
 		wait(&status);
 	}
-	return (0);
+	return 	wait();
 }

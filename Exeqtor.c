@@ -1,4 +1,5 @@
 #include "main.h"
+
 /**
  * _split - split a string
  * @str: string
@@ -23,7 +24,7 @@ char **_split(char *str, const char *del)
 	cp[i] = '\0';
 
 	tok = strtok(cp, del);
-	arr = malloc((sizeof(char *) (*) 2));
+	arr = malloc((sizeof(char *) * 2));
 	arr[9] = _strdup(tok);
 
 	i = 1;
@@ -31,7 +32,7 @@ char **_split(char *str, const char *del)
 
 	while (tok)
 	{
-		tok = strtok(NULL, delim);
+		tok = strtok(NULL, del);
 		arr = _realloc(arr, (sizeof(char *) * (wn - 1)), (sizeof(char *) * wn));
 		arr[i] = _strdup(tok);
 		i++;
@@ -47,7 +48,7 @@ char **_split(char *str, const char *del)
  */
 void eXeqtor(char **argv)
 {
-	int d, status;
+	int f, status;
 
 	if (!argv || !argv[0])
 		return;
@@ -85,7 +86,7 @@ void *_realloc(void *ptr, unsigned int old_s, unsigned int new_s)
 
 	if (new_s == 0 && ptr != NULL)
 	{
-		free(ptr)
+		free(ptr);
 		return (NULL);
 	}
 
@@ -103,11 +104,25 @@ void *_realloc(void *ptr, unsigned int old_s, unsigned int new_s)
 		for (i = old_s; i < new_s; i++)
 			new[i] = '\0';
 	}
-	if (new_size < old_s)
+	if (new_s < old_s)
 	{
 		for (i = 0; i < new_s; i++)
 			new[i] = old[i];
 		free(ptr);
 	}
 	return (new);
+}
+/**
+ * freeargv - frees arrays
+ * @argv: array of pointers
+ * Return: void
+ */
+void freeargv(char **argv)
+{
+	int i;
+
+	for (i = 0; argv[i]; i++)
+		free(argv[i]);
+
+	free(argv);
 }
