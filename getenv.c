@@ -1,7 +1,7 @@
 #include "main.h"
 /**
  * _getenv - gets global val
- * @envar - var name
+ * @envar: var name
  * Return: string
  */
 char *_getenv(char *envar)
