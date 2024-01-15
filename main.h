@@ -11,37 +11,29 @@
 #include <stddef.h>
 #include <sys/stat.h>
 #include <signal.h>
+#include <fcntl.h>
 
-int _putchar(char c);
-void _puts(char *str);
-int _strlen(char *s);
-char *_strdup(char *str);
-char *concats(char *name, char *sep, char *value);
-
-char **_split(char *str, const char *del);
-void eXeqtor(char **argv);
-void *_realloc(void *ptr, unsigned int old_s, unsigned int new_s);
-
-
+#define DELIM " \t\n"
 extern char **environ;
 
-/**
- * struct list_path - Linked list containing PATH directories
- * @dir: directory in path
- * @p: pointer to next node
- */
-typedef struct PATH_list
-{
-	char *dir;
-	struct PATH_list *p;
-} PATH_list;
+/* FUNCTIONS */
+char *_getline(void);
+char **_split(char *bf);
+int eXeqtor(char **cmd, char **av, int i);
+char *_getenv(char *envar);
+char *get_PATH(char *cmd);
 
+/* STR MANIPULATION */
+int _strlen(const char *s);
+char *_strcpy(char *dest, const char *src);
+int _strncmp(const char *s1, const char *s2, unsigned int n);
+char *_strdup(char *src);
+char *_strcat(char *dest, const char *src);
 
-char *_getenv(const char *name);
-PATH_list *add_node_end(PATH_list **head, char *str);
-PATH_list *goto_path(char *path);
-char *_chos(char *flnm, PATH_list *head);
-void freeargv(char **arvg);
-void free_list(PATH_list *head);
+/* Help */
+void _free2dArr(char **arr);
+void error_handle(char *name, char *cmd, int indx);
+char *_itoa(int num);
+void str_rev(char *str, int len);
 
 #endif

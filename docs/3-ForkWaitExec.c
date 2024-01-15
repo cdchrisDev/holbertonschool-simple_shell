@@ -12,22 +12,16 @@ int main(int argc, char *argv[])
 	getid = getpid(); /* tell me who processes */
 	printf("before fork I was one: I identify as %u, and that means chris.\n", getid);
 	MyPid = fork(); /* new process */
-	wait(&status); /* wait until process ends */
 	if (MyPid == -1)
 	{	/* check new process return success*/
 		perror("Error:");
-		return (1);
+		return (-1);
 	}
 	/* checking process status*/
 	getid = getpid();
 	if (MyPid == 0)
 	{
-		fork();
 		printf("After fork I'm another,now %u. I grew up so much I became the child.\n", getid);
-
-		wait(&status);
-
-                MyPid = fork();
 
                 char *argv[] = { "/bin/ls", "-l", "/tmp/", NULL };
 		char *newarg = argv[0];
@@ -49,5 +43,5 @@ int main(int argc, char *argv[])
 		printf("I'm your father\n");
 		wait(&status);
 	}
-	return 	wait();
+	return (1);
 }
