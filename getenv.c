@@ -1,7 +1,7 @@
 #include "main.h"
 /**
  * _getenv - gets global val
- * @name - var name
+ * @envar - var name
  * Return: string
  */
 char *_getenv(char *envar)
@@ -11,7 +11,7 @@ char *_getenv(char *envar)
 
 	i = 0;
 	Varlen = _strlen(envar);
-	while(environ[i])
+	while (environ[i])
 	{
 		tmp = _strdup(environ[i]);
 		key = strtok(tmp, "=");
